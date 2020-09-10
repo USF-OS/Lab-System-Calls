@@ -22,7 +22,7 @@ $ strace ls 2>&1 | grep '^stat'
 
 When you run a command, such as `strace cat`, each system call will be printed interactively to your terminal. So the general workflow is: run **strace** on a command, which will then print a list of **system calls**. You can run `strace` on any binary file; if you compile your own C code,  `strace a.out` will display the system calls being used by your code (most likely the calls are invoked by the C library, not your code directly).
 
-## Part 1: Tracing System Calls
+## Part I: Tracing System Calls
 
 For the first part of this lab, you will trace several programs and record the results. See detailed instructions below.
 
@@ -48,7 +48,7 @@ syscall 3:
 
 (After reading the documentation for program XYZ, I found its purpose is DEF)
 
-# Part II: Intercepting System Calls
+## Part II: Intercepting System Calls
 
 Alright, so we have a somewhat reasonable idea of what system calls are: 
 privileged functions that are processed in kernel space. Let's imagine that
@@ -69,7 +69,7 @@ after all, they are handled in kernel space. While we could certainly modify
 the Linux source code and recompile the kernel, we have another option:
 `LD_PRELOAD`.
 
-## LD_PRELOAD
+### LD_PRELOAD
 
 The `LD_PRELOAD` environment variable specifies libraries that should be loaded
 before a program starts. We also know that most 'system calls'  we use in
