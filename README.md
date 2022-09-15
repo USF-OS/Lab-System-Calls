@@ -1,6 +1,8 @@
 # System Calls
 
-As we saw in class, the `strace` utility allows us to trace system calls on running programs. We can learn quite a bit about a program just by inspecting its system calls.
+The `strace` utility allows us to trace system calls on running programs. We can learn quite a bit about a program just by inspecting its system calls.
+
+(if you don't have strace installed, then do `sudo pacman -Sy strace`)
 
 Here are a few example usages of `strace`:
 
@@ -20,21 +22,22 @@ $ strace ls 2>&1 | grep '^stat'
 # name comes first, followed by its parameters and return value.
 ```
 
+
 When you run a command, such as `strace cat`, each system call will be printed interactively to your terminal. So the general workflow is: run **strace** on a command, which will then print a list of **system calls**. You can run `strace` on any binary file; if you compile your own C code,  `strace a.out` will display the system calls being used by your code (most likely the calls are invoked by the C library, not your code directly).
 
 ## Part I: Tracing System Calls
 
 For the first part of this lab, you will trace several programs and record the results. See detailed instructions below.
 
-1. First, run a trace on `ls`. Record all of the unique system calls (just their names) used by `ls`. To avoid doing a lot of tedious work, you could probably automate most of this with a shell pipeline or command line flag.
+1. First, run a trace on `ls`. Record all of the unique system calls (just their names) used by `ls`. To avoid doing a lot of tedious work, automate most of this with a shell pipeline or command line flag.
 
-(list the syscalls here, use '*' to create a bulleted list in Markdown format)
+(list the syscalls here as a bulleted list, use '*' to create a bulleted list in Markdown format)
 
 2. How many unique system calls are in your list?
 
-3. Next, get the examples for `fork` and `readdir` from the schedule page. Go through the code an understand the logic. Then compile them and list their system calls below. Were there any unexpected or interesting results, or any differences in the output?
+3. Next, get the examples for `fork` and `readdir` from the schedule page. Go through the code an understand the logic. Then compile them and list their system calls below. Were there any differences in the output (syscalls used, and their counts)?
 
-4. Next, trace several commands you already know and look for new system calls that you haven't seen before (or look up some new commands if you'd like). Describe three system calls below (figure out what they do), and include both the command that generated the system calls as well as the syscall parameters/return values:
+4. Next, trace several commands you already know and look for new system calls that you haven't seen before (or look up some new commands if you'd like). Describe three system calls below (figure out what they do), and include the command that generated the system calls.
 
 syscall 1: 
 
@@ -42,11 +45,7 @@ syscall 2:
 
 syscall 3:
 
-5. For your next mission, you are going to try to predict the purpose of a program simply by inspecting its system calls. Go into the `/bin` directory and look for a program/utility you've never used before. Trace it with `strace` and try to understand what the program is doing without reading its documentation.
-
-(I predict program XYZ is performing task ABC...)
-
-(After reading the documentation for program XYZ, I found its purpose is DEF)
+Make sure that the items you found above are actually system calls and not utility names or C library functions...
 
 ## Part II: Intercepting System Calls
 
